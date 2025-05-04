@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <button onclick="dataOggi()">Data di oggi</button>
+    <button onclick="mostraInputCalendario()">Calendario</button>
+    
+    <p id="data"></p>
+    
+    <!-- Form per inserire la data -->
+    <div id="formCalendario" style="display: none;">
+      <input type="date" id="dataCalendario">
+      <button onclick="calendario()">Mostra giorno della settimana</button>
+    </div>
+    
+    <p id="giornoSettimana"></p>
+
+    <script>
+      function dataOggi() {
+        var dataDiOggi = new Date();
+        var giorno = dataDiOggi.getDate(); // restituisce il giorno del mese attuale
+        var mese = dataDiOggi.getMonth() + 1; // +1 perchè getMonth restituisce n da 0 a 11
+        var anno = dataDiOggi.getFullYear(); // restituisce l'anno attuale
+
+        if (giorno < 10) {
+          giorno = "0" + giorno;
+        }
+        if (mese < 10) {
+          mese = "0" + mese;
+        }
+
+        var dataFinale = giorno + "/" + mese + "/" + anno;
+        document.getElementById("data").innerHTML = dataFinale;
+      }
+
+      function mostraInputCalendario() {
+        document.getElementById("formCalendario").style.display = "block";//rende visibile il form
+      }
+
+      function calendario() {
+        var giorni = [
+          "Domenica",
+          "Lunedì",
+          "Martedì",
+          "Mercoledì",
+          "Giovedì",
+          "Venerdì",
+          "Sabato",
+        ];
+        
+        var dataInput = document.getElementById("dataCalendario").value;
+        var data = new Date(dataInput);
+        var giorno = data.getDay();
+        document.getElementById("giornoSettimana").innerHTML = "Il giorno della settimana è: " + giorni[giorno];
+      }
+    </script>
+  </body>
+</html>
